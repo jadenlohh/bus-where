@@ -10,8 +10,8 @@ export default function Navbar() {
     <>
       <div className="navbar">
         <div className="flex justify-between">
-          <div className="bg-white rounded-full shadow grow p-4.5">
-            <h1 className="text-red font-semibold">bus-arrival</h1>
+          <div className="bg-white rounded-full shadow grow p-5">
+            <h1 className="font-semibold">where my bus?</h1>
           </div>
         </div>
       </div>
