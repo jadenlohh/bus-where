@@ -8,7 +8,7 @@ export default function Home() {
 
       <div className="legend mt-5">
         <div className="bg-white rounded-3xl text-xs shadow p-5">
-          <p className="text-grey">LEGEND</p>
+          <p>LEGEND</p>
 
           <div className="flex flex-wrap justify-between">
             <div className="pt-5">
