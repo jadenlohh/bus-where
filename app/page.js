@@ -6,8 +6,8 @@ export default function Home() {
     <main className="h-screen p-4">
       <Navbar />
 
-      <div className="legend my-5">
-        <div className="bg-white rounded-4xl text-xs shadow p-5">
+      <div className="legend mt-5">
+        <div className="bg-white rounded-3xl text-xs shadow p-5">
           <p className="text-grey">LEGEND</p>
 
           <div className="flex flex-wrap justify-between">
@@ -42,6 +42,26 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <footer>
+        <div className="text-grey text-xs px-5 mt-3">
+          <p className="pb-1">
+            All data obtained from LTA's{" "}
+            <span>
+              <Link className="underline" href="https://datamall.lta.gov.sg">
+                DataMall API
+              </Link>
+            </span>
+          </p>
+
+          <p>
+            Built by{" "}
+            <Link className="underline" href="https://github.com/jadenlohh">
+              jadenlohh
+            </Link>
+          </p>
+        </div>
+      </footer>
     </main>
   );
 }
