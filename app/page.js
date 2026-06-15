@@ -25,7 +25,7 @@ export default async function Home() {
         <div className="bg-white rounded-3xl text-xs shadow p-5">
           <p>LEGEND</p>
 
-          <div className="flex flex-wrap justify-between">
+          <div className="flex flex-wrap justify-between items-center">
             <div className="pt-5">
               <div className="border-2 border-green-600 rounded-full w-8"></div>
               <p className="pt-1">Seats Available</p>
