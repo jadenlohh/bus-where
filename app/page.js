@@ -1,10 +1,25 @@
 import Link from "next/link";
 import Navbar from "./components/navbar";
 
-export default function Home() {
+export default async function Home() {
+  // const data = await fetch("https://datamall2.mytransport.sg/ltaodataservice/v3/BusArrival?BusStopCode=77009", {
+  //   headers: {
+  //     "AccountKey": "hUwkNdiWTAGCca1OQIep3A=="
+  //   }
+  // })
+  // const buses = await data.json()
+
+  // console.log(buses)
+
   return (
-    <main className="h-screen p-4">
+    <main className="h-screen p-4 mx-auto lg:w-2xl">
       <Navbar />
+
+      <div className="mt-5">
+        {
+
+        }
+      </div>
 
       <div className="legend mt-5">
         <div className="bg-white rounded-3xl text-xs shadow p-5">
