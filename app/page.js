@@ -43,12 +43,12 @@ export default async function Home() {
             return (
               <div className="flex pt-6" key={crypto.randomUUID()}>
                 <div className="bus-number">
-                  <div className="bg-red text-white rounded-lg text-center w-17 p-3.5">
+                  <div className="bg-red text-white rounded-lg text-center w-16 p-3">
                     <p>{bus.ServiceNo}</p>
                   </div>
                 </div>
 
-                <div className="w-full ms-4.5">
+                <div className="w-full ms-5">
                   <div className="border-b border-b-grey pb-0.5">
                     <p className="text-xs text-grey">
                       {await getBusStopName(bus.NextBus.OriginCode)} →{" "}

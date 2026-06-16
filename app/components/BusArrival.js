@@ -26,18 +26,18 @@ export default function BusArrival({ estimatedArrival, busLoad, busType }) {
   }
 
   return (
-    <div className="arrival-time flex-1 pt-3">
+    <div className="arrival-time flex-1 pt-4.5 lg:pt-2">
       <div className="flex">
         {busLoad === "SEA" && (
-          <div className="border-2 border-green-600 rounded-full me-1.5"></div>
+          <div className="border-2 border-green-600 rounded-full me-2.5"></div>
         )}
 
         {busLoad === "SDA" && (
-          <div className="border-2 border-yellow-600 rounded-full me-1.5"></div>
+          <div className="border-2 border-yellow-600 rounded-full me-2.5"></div>
         )}
 
         {busLoad === "LSD" && (
-          <div className="border-2 border-red-600 rounded-full me-1.5"></div>
+          <div className="border-2 border-red-600 rounded-full me-2.5"></div>
         )}
 
         <h1 className="text-2xl font-semibold">
@@ -45,7 +45,7 @@ export default function BusArrival({ estimatedArrival, busLoad, busType }) {
 
           {getBusArrivalTime(estimatedArrival) !== "Arr" &&
             getBusArrivalTime(estimatedArrival) !== "N/A" && (
-              <span className="text-base font-normal"> minute</span>
+              <span className="text-sm font-normal"> min</span>
             )}
         </h1>
       </div>
