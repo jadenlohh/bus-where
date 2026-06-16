@@ -1,24 +1,62 @@
 import Link from "next/link";
 import Navbar from "./components/navbar";
+import BusArrival from "./components/bus-arrival";
 
 export default async function Home() {
-  // const data = await fetch("https://datamall2.mytransport.sg/ltaodataservice/v3/BusArrival?BusStopCode=77009", {
-  //   headers: {
-  //     "AccountKey": "hUwkNdiWTAGCca1OQIep3A=="
-  //   }
-  // })
-  // const buses = await data.json()
+  const data = await fetch(
+    "https://datamall2.mytransport.sg/ltaodataservice/v3/BusArrival?BusStopCode=53009",
+    {
+      headers: {
+        AccountKey: process.env.API_KEY,
+      },
+    },
+  );
 
-  // console.log(buses)
+  const busServices = await data.json();
 
   return (
-    <main className="h-screen p-4 mx-auto lg:w-2xl">
+    <main className="h-screen mx-auto p-4 lg:w-2xl">
       <Navbar />
 
-      <div className="mt-5">
-        {
+      <div className="bus-services-container">
+        <div className="bg-white rounded-3xl shadow p-5 pt-0 pe-8 mt-5">
+          {busServices.Services.map(async (bus) => {
+            return (
+              <div className="flex pt-6" key={crypto.randomUUID()}>
+                <div className="bus-number">
+                  <div className="bg-red text-white rounded-lg text-center w-17 p-3.5">
+                    <p>{bus.ServiceNo}</p>
+                  </div>
+                </div>
 
-        }
+                <div className="w-full ms-4.5">
+                  <div className="border-b border-b-grey pb-0.5">
+                  </div>
+
+                  <div className="flex flex-col justify-between w-full lg:flex-row lg:items-center lg:pt-3">
+                    <BusArrival
+                      estimatedArrival={bus.NextBus.EstimatedArrival}
+                      busLoad={bus.NextBus.Load}
+                      busType={bus.NextBus.Type}
+                    />
+
+                    <BusArrival
+                      estimatedArrival={bus.NextBus2.EstimatedArrival}
+                      busLoad={bus.NextBus2.Load}
+                      busType={bus.NextBus2.Type}
+                    />
+
+                    <BusArrival
+                      estimatedArrival={bus.NextBus3.EstimatedArrival}
+                      busLoad={bus.NextBus3.Load}
+                      busType={bus.NextBus3.Type}
+                    />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       <div className="legend mt-5">
