@@ -1,7 +1,7 @@
-import { Inter } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const inter = DM_Sans({
   subsets: ["latin"]
 });
 
