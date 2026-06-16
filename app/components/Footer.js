@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer>
-      <div className="text-grey text-xs px-5 pt-3 pb-10">
+      <div className="text-grey text-xs px-6 pt-3 pb-10">
         <p className="pb-1">
           All data obtained from LTA's{" "}
           <span>

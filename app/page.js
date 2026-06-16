@@ -38,7 +38,7 @@ export default async function Home() {
       <Navbar />
 
       <div className="bus-services-container">
-        <div className="bg-white rounded-3xl shadow p-5 pt-0 pe-8 mt-5">
+        <div className="bg-white rounded-3xl shadow pb-5 ps-6 pe-8 pt-0 mt-5">
           {busArrival.Services.map(async (bus) => {
             return (
               <div className="flex pt-6" key={crypto.randomUUID()}>

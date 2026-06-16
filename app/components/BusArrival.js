@@ -50,7 +50,7 @@ export default function BusArrival({ estimatedArrival, busLoad, busType }) {
         </h1>
       </div>
 
-      <p className="text-xs text-grey pt-0.5">
+      <p className="text-xs text-grey pt-1">
         {estimatedArrival !== "" && estimatedArrival.slice(0, -6).split("T")[1] + " • " + getBusType(busType)}
       </p>
     </div>
