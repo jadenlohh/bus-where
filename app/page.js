@@ -1,6 +1,6 @@
-import Link from "next/link";
 import Navbar from "./components/Navbar";
 import BusArrival from "./components/BusArrival";
+import Footer from "./components/Footer";
 
 export default async function Home() {
   const data = await fetch(
@@ -12,7 +12,7 @@ export default async function Home() {
     },
   );
 
-  const busServices = await data.json();
+  const busArrival = await data.json();
 
   return (
     <main className="h-screen mx-auto p-4 lg:w-2xl">
@@ -20,7 +20,7 @@ export default async function Home() {
 
       <div className="bus-services-container">
         <div className="bg-white rounded-3xl shadow p-5 pt-0 pe-8 mt-5">
-          {busServices.Services.map(async (bus) => {
+          {busArrival.Services.map(async (bus) => {
             return (
               <div className="flex pt-6" key={crypto.randomUUID()}>
                 <div className="bus-number">
@@ -30,8 +30,7 @@ export default async function Home() {
                 </div>
 
                 <div className="w-full ms-4.5">
-                  <div className="border-b border-b-grey pb-0.5">
-                  </div>
+                  <div className="border-b border-b-grey pb-0.5"></div>
 
                   <div className="flex flex-col justify-between w-full lg:flex-row lg:items-center lg:pt-3">
                     <BusArrival
@@ -59,8 +58,8 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="legend mt-5">
-        <div className="bg-white rounded-3xl text-xs shadow p-5">
+      <div className="legend">
+        <div className="bg-white rounded-3xl text-xs shadow p-5 mt-5">
           <p>LEGEND</p>
 
           <div className="flex flex-wrap justify-between items-center">
@@ -96,25 +95,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <footer>
-        <div className="text-grey text-xs px-5 mt-3">
-          <p className="pb-1">
-            All data obtained from LTA's{" "}
-            <span>
-              <Link className="underline" href="https://datamall.lta.gov.sg">
-                DataMall API
-              </Link>
-            </span>
-          </p>
-
-          <p>
-            Built by{" "}
-            <Link className="underline" href="https://github.com/jadenlohh">
-              jadenlohh
-            </Link>
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }
