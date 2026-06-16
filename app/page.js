@@ -14,6 +14,25 @@ export default async function Home() {
 
   const busArrival = await data.json();
 
+  async function getBusStopName(code) {
+    const data = await fetch(
+      `https://datamall2.mytransport.sg/ltaodataservice/BusStops?BusStopCode=${code}`,
+      {
+        headers: {
+          AccountKey: process.env.API_KEY,
+        },
+      },
+    );
+
+    const busStop = await data.json();
+
+    try {
+      return busStop.value[0].Description;
+    } catch (error) {
+      return "N/A";
+    }
+  }
+
   return (
     <main className="h-screen mx-auto p-4 lg:w-2xl">
       <Navbar />
@@ -30,7 +49,12 @@ export default async function Home() {
                 </div>
 
                 <div className="w-full ms-4.5">
-                  <div className="border-b border-b-grey pb-0.5"></div>
+                  <div className="border-b border-b-grey pb-0.5">
+                    <p className="text-xs text-grey">
+                      {await getBusStopName(bus.NextBus.OriginCode)} →{" "}
+                      {await getBusStopName(bus.NextBus.DestinationCode)}
+                    </p>
+                  </div>
 
                   <div className="flex flex-col justify-between w-full lg:flex-row lg:items-center lg:pt-3">
                     <BusArrival
