@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Navbar from "./components/navbar";
-import BusArrival from "./components/bus-arrival";
+import Navbar from "./components/Navbar";
+import BusArrival from "./components/BusArrival";
 
 export default async function Home() {
   const data = await fetch(
