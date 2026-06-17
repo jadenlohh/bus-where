@@ -1,6 +1,6 @@
 import Navbar from "./components/Navbar";
-import BusArrival from "./components/BusArrival";
 import Footer from "./components/Footer";
+import BusService from "./components/BusService";
 
 export default async function Home() {
   const data = await fetch(
@@ -57,21 +57,21 @@ export default async function Home() {
                   </div>
 
                   <div className="flex flex-col justify-between w-full lg:flex-row lg:items-center lg:pt-3">
-                    <BusArrival
+                    <BusService
                       estimatedArrival={bus.NextBus.EstimatedArrival}
                       busLoad={bus.NextBus.Load}
                       busType={bus.NextBus.Type}
                       wheelchairAccessible={bus.NextBus.Feature == "WAB" && true}
                     />
 
-                    <BusArrival
+                    <BusService
                       estimatedArrival={bus.NextBus2.EstimatedArrival}
                       busLoad={bus.NextBus2.Load}
                       busType={bus.NextBus2.Type}
                       wheelchairAccessible={bus.NextBus2.Feature == "WAB" && true}
                     />
 
-                    <BusArrival
+                    <BusService
                       estimatedArrival={bus.NextBus3.EstimatedArrival}
                       busLoad={bus.NextBus3.Load}
                       busType={bus.NextBus3.Type}
