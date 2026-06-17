@@ -1,4 +1,4 @@
-export default function BusService({
+export default function BusArrival({
   estimatedArrival,
   busLoad,
   busType,

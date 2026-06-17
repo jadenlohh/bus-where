@@ -1,6 +1,6 @@
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import BusService from "./components/BusService";
+import BusArrival from "./components/BusArrival";
 
 export default async function Home() {
   const data = await fetch(
@@ -68,7 +68,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="bus-services-container">
+      <div className="bus-services">
         <div className="bg-white rounded-3xl shadow pb-5 ps-6 pe-8 pt-0 mt-5">
           {busArrival.Services.map(async (bus) => {
             return (
@@ -88,7 +88,7 @@ export default async function Home() {
                   </div>
 
                   <div className="flex flex-col justify-between w-full lg:flex-row lg:items-center lg:pt-3">
-                    <BusService
+                    <BusArrival
                       estimatedArrival={bus.NextBus.EstimatedArrival}
                       busLoad={bus.NextBus.Load}
                       busType={bus.NextBus.Type}
@@ -97,7 +97,7 @@ export default async function Home() {
                       }
                     />
 
-                    <BusService
+                    <BusArrival
                       estimatedArrival={bus.NextBus2.EstimatedArrival}
                       busLoad={bus.NextBus2.Load}
                       busType={bus.NextBus2.Type}
@@ -106,7 +106,7 @@ export default async function Home() {
                       }
                     />
 
-                    <BusService
+                    <BusArrival
                       estimatedArrival={bus.NextBus3.EstimatedArrival}
                       busLoad={bus.NextBus3.Load}
                       busType={bus.NextBus3.Type}
