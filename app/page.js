@@ -37,6 +37,37 @@ export default async function Home() {
     <main className="h-screen mx-auto p-4 lg:w-2xl">
       <Navbar />
 
+      <div className="search">
+        <div className="flex items-center bg-white rounded-full shadow grow px-5 py-4.5 mt-5 lg:p-5">
+          <svg
+            width="20px"
+            height="20px"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            color="#A7A7A7"
+          >
+            <path
+              d="M17 17L21 21"
+              stroke="#A7A7A7"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            ></path>
+            <path
+              d="M3 11C3 15.4183 6.58172 19 11 19C13.213 19 15.2161 18.1015 16.6644 16.6493C18.1077 15.2022 19 13.2053 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11Z"
+              stroke="#A7A7A7"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            ></path>
+          </svg>
+
+          <input type="text" placeholder="Search Bus Stop" className="text-sm w-full ms-2.5 focus:outline-none placeholder:text-grey" />
+        </div>
+      </div>
+
       <div className="bus-services-container">
         <div className="bg-white rounded-3xl shadow pb-5 ps-6 pe-8 pt-0 mt-5">
           {busArrival.Services.map(async (bus) => {
@@ -61,21 +92,27 @@ export default async function Home() {
                       estimatedArrival={bus.NextBus.EstimatedArrival}
                       busLoad={bus.NextBus.Load}
                       busType={bus.NextBus.Type}
-                      wheelchairAccessible={bus.NextBus.Feature == "WAB" && true}
+                      wheelchairAccessible={
+                        bus.NextBus.Feature == "WAB" && true
+                      }
                     />
 
                     <BusService
                       estimatedArrival={bus.NextBus2.EstimatedArrival}
                       busLoad={bus.NextBus2.Load}
                       busType={bus.NextBus2.Type}
-                      wheelchairAccessible={bus.NextBus2.Feature == "WAB" && true}
+                      wheelchairAccessible={
+                        bus.NextBus2.Feature == "WAB" && true
+                      }
                     />
 
                     <BusService
                       estimatedArrival={bus.NextBus3.EstimatedArrival}
                       busLoad={bus.NextBus3.Load}
                       busType={bus.NextBus3.Type}
-                      wheelchairAccessible={bus.NextBus3.Feature == "WAB" && true}
+                      wheelchairAccessible={
+                        bus.NextBus3.Feature == "WAB" && true
+                      }
                     />
                   </div>
                 </div>
