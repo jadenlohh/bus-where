@@ -5,9 +5,9 @@ export default function NextArrivalTiming({
   wheelchairAccessible,
 }) {
   function getBusArrivalTime(arrival) {
-    if (arrival === "") return "N/A";
+    if (!arrival) return "N/A";
 
-    const arrivalTime = new Date(arrival.slice(0, -6));
+    const arrivalTime = new Date(arrival);
     const currentTime = new Date();
 
     const timeDiff = (arrivalTime - currentTime) / 1000; // Time difference in seconds
