@@ -15,7 +15,7 @@ export default async function Home({ searchParams }) {
 
       <SearchBar />
 
-      <div className="bus-arrivals bg-white rounded-3xl shadow pb-5 ps-6 pe-8 pt-0 mt-5">
+      <div className="bus-arrivals bg-white rounded-3xl shadow ps-6 py-6 pe-8 pt-0 mt-5">
         {busArrivals.map(async (bus) => {
           return (
             <div className="flex pt-6" key={crypto.randomUUID()}>
@@ -59,6 +59,8 @@ export default async function Home({ searchParams }) {
             </div>
           );
         })}
+
+        {busArrivals.length === 0 && <p className="text-center text-grey text-sm my-auto py-40">No Bus Stop Found</p> }
       </div>
 
       <div className="legend">
