@@ -61,18 +61,21 @@ export default async function Home() {
                       estimatedArrival={bus.NextBus.EstimatedArrival}
                       busLoad={bus.NextBus.Load}
                       busType={bus.NextBus.Type}
+                      wheelchairAccessible={bus.NextBus.Feature == "WAB" && true}
                     />
 
                     <BusArrival
                       estimatedArrival={bus.NextBus2.EstimatedArrival}
                       busLoad={bus.NextBus2.Load}
                       busType={bus.NextBus2.Type}
+                      wheelchairAccessible={bus.NextBus2.Feature == "WAB" && true}
                     />
 
                     <BusArrival
                       estimatedArrival={bus.NextBus3.EstimatedArrival}
                       busLoad={bus.NextBus3.Load}
                       busType={bus.NextBus3.Type}
+                      wheelchairAccessible={bus.NextBus3.Feature == "WAB" && true}
                     />
                   </div>
                 </div>
@@ -105,12 +108,12 @@ export default async function Home() {
             <div className="pt-5 lg:pt-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                height="26px"
-                viewBox="0 -960 960 960"
-                width="26px"
+                width="22"
+                height="22"
                 fill="#171717"
+                viewBox="0 0 256 256"
               >
-                <path d="M423.5-743.5Q400-767 400-800t23.5-56.5Q447-880 480-880t56.5 23.5Q560-833 560-800t-23.5 56.5Q513-720 480-720t-56.5-23.5ZM680-80v-200H480q-33 0-56.5-23.5T400-360v-240q0-33 23.5-56.5T480-680q24 0 41.5 10.5T559-636q55 66 99.5 90.5T760-520v80q-53 0-107-23t-93-55v138h120q33 0 56.5 23.5T760-300v220h-80Zm-280 0q-83 0-141.5-58.5T200-280q0-72 45.5-127T360-476v82q-35 14-57.5 44.5T280-280q0 50 35 85t85 35q39 0 69.5-22.5T514-240h82q-14 69-69 114.5T400-80Z" />
+                <path d="M255.59,189.47a8,8,0,0,0-10.12-5.06l-17.42,5.81-28.9-57.8A8,8,0,0,0,192,128H112V104h56a8,8,0,0,0,0-16H112V79a32,32,0,1,0-16,0V89.81A72,72,0,0,0,112,232c33.52,0,63.69-22.71,71.75-54a8,8,0,1,0-15.5-4C162.09,198,137.91,216,112,216A56,56,0,0,1,96,106.34V136a8,8,0,0,0,8,8h83.05l29.79,59.58a8,8,0,0,0,9.69,4l24-8A8,8,0,0,0,255.59,189.47ZM88,48a16,16,0,1,1,16,16A16,16,0,0,1,88,48Z"></path>
               </svg>
 
               <p className="pt-1">Wheelchair Accessible</p>
