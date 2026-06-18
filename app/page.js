@@ -1,13 +1,22 @@
+"use client";
+import useSWR from "swr";
+
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import NextArrivalTiming from "./components/NextArrivalTiming";
 import SearchBar from "./components/SearchBar";
 
-export default async function Home({ searchParams }) {
-  const params = await searchParams;
-  const busStopCode = params.busStop;
+const fetcher = (url) => fetch(url).then((response) => response.json());
 
-  const busArrivals = await getBusArrivalData(busStopCode);
+export default function Home() {
+  const {
+    data: busArrivalData,
+    error,
+    isLoading,
+  } = useSWR("/api/getBusArrival", fetcher);
+
+  if (error) return <div>An error occured</div>;
+  // if (isLoading) return <div>Loading...</div>;
 
   return (
     <main className="h-screen mx-auto p-4 lg:w-2xl">
@@ -15,52 +24,75 @@ export default async function Home({ searchParams }) {
 
       <SearchBar />
 
-      <div className="bus-arrivals bg-white rounded-3xl shadow ps-6 py-6 pe-8 pt-0 mt-5">
-        {busArrivals.map(async (bus) => {
-          return (
-            <div className="flex pt-6" key={crypto.randomUUID()}>
-              <div className="bus-number">
-                <div className="bg-red text-white rounded-lg text-center w-16 p-3">
-                  <p>{bus.ServiceNo}</p>
-                </div>
-              </div>
-
-              <div className="w-full ms-5">
-                <div className="border-b border-b-grey pb-0.5">
-                  <p className="text-xs text-grey">
-                    {await getBusStopName(bus.NextBus.OriginCode)} →{" "}
-                    {await getBusStopName(bus.NextBus.DestinationCode)}
-                  </p>
-                </div>
-
-                <div className="flex flex-col justify-between w-full lg:flex-row lg:items-center lg:pt-3">
-                  <NextArrivalTiming
-                    estimatedArrival={bus.NextBus.EstimatedArrival}
-                    busLoad={bus.NextBus.Load}
-                    busType={bus.NextBus.Type}
-                    wheelchairAccessible={bus.NextBus.Feature == "WAB" && true}
-                  />
-
-                  <NextArrivalTiming
-                    estimatedArrival={bus.NextBus2.EstimatedArrival}
-                    busLoad={bus.NextBus2.Load}
-                    busType={bus.NextBus2.Type}
-                    wheelchairAccessible={bus.NextBus2.Feature == "WAB" && true}
-                  />
-
-                  <NextArrivalTiming
-                    estimatedArrival={bus.NextBus3.EstimatedArrival}
-                    busLoad={bus.NextBus3.Load}
-                    busType={bus.NextBus3.Type}
-                    wheelchairAccessible={bus.NextBus3.Feature == "WAB" && true}
-                  />
-                </div>
+      <div className="bus-arrival-timings">
+        <div className="bg-white rounded-3xl shadow pb-5 ps-6 pe-8 pt-0 mt-5">
+          {isLoading ? (
+            <div className="my-auto w-full py-30">
+              <div className="flex w-full place-content-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="26"
+                  height="26"
+                  fill="#171717"
+                  viewBox="0 0 256 256"
+                  className="animate-spin"
+                >
+                  <path d="M232,128a104,104,0,0,1-208,0c0-41,23.81-78.36,60.66-95.27a8,8,0,0,1,6.68,14.54C60.15,61.59,40,93.27,40,128a88,88,0,0,0,176,0c0-34.73-20.15-66.41-51.34-80.73a8,8,0,0,1,6.68-14.54C208.19,49.64,232,87,232,128Z"></path>
+                </svg>
               </div>
             </div>
-          );
-        })}
+          ) : (
+            busArrivalData.map((bus) => {
+              return (
+                <div className="flex pt-6" key={bus.ServiceNo}>
+                  <div className="bus-number">
+                    <div className="bg-red text-white rounded-lg text-center w-16 p-3">
+                      <p>{bus.ServiceNo}</p>
+                    </div>
+                  </div>
 
-        {busArrivals.length === 0 && <p className="text-center text-grey text-sm my-auto py-40">No Bus Stop Found</p> }
+                  <div className="w-full ms-5">
+                    {/* <div className="border-b border-b-grey pb-0.5">
+                    <p className="text-xs text-grey">
+                      {getBusStopName(bus.NextBus.OriginCode)} →{" "}
+                      {getBusStopName(bus.NextBus.DestinationCode)}
+                    </p>
+                  </div> */}
+
+                    <div className="flex flex-col justify-between w-full lg:flex-row lg:items-center lg:pt-3">
+                      <NextArrivalTiming
+                        estimatedArrival={bus.NextBus.EstimatedArrival}
+                        busLoad={bus.NextBus.Load}
+                        busType={bus.NextBus.Type}
+                        wheelchairAccessible={
+                          bus.NextBus.Feature == "WAB" && true
+                        }
+                      />
+
+                      <NextArrivalTiming
+                        estimatedArrival={bus.NextBus2.EstimatedArrival}
+                        busLoad={bus.NextBus2.Load}
+                        busType={bus.NextBus2.Type}
+                        wheelchairAccessible={
+                          bus.NextBus2.Feature == "WAB" && true
+                        }
+                      />
+
+                      <NextArrivalTiming
+                        estimatedArrival={bus.NextBus3.EstimatedArrival}
+                        busLoad={bus.NextBus3.Load}
+                        busType={bus.NextBus3.Type}
+                        wheelchairAccessible={
+                          bus.NextBus3.Feature == "WAB" && true
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
       </div>
 
       <div className="legend">
@@ -105,37 +137,11 @@ export default async function Home({ searchParams }) {
   );
 }
 
-// child function
-
-async function getBusArrivalData(busStopCode) {
-  const data = await fetch(
-    `https://datamall2.mytransport.sg/ltaodataservice/v3/BusArrival?BusStopCode=${busStopCode}`,
-    {
-      headers: {
-        AccountKey: process.env.API_KEY,
-      },
-    },
+function getBusStopName(busStopCode) {
+  const { data: busStopName } = useSWR(
+    `/api/getBusStopName?busStopCode=${busStopCode}`,
+    fetcher,
   );
 
-  const busArrival = await data.json();
-  return busArrival.Services.reverse();
-}
-
-async function getBusStopName(busStopCode) {
-  const data = await fetch(
-    `https://datamall2.mytransport.sg/ltaodataservice/BusStops?BusStopCode=${busStopCode}`,
-    {
-      headers: {
-        AccountKey: process.env.API_KEY,
-      },
-    },
-  );
-
-  const busStopName = await data.json();
-
-  try {
-    return busStopName.value[0].Description;
-  } catch (error) {
-    return "N/A";
-  }
+  return busStopName;
 }
