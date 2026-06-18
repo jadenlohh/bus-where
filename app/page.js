@@ -11,9 +11,8 @@ import { useSearchParams } from "next/navigation";
 const fetcher = (url) => fetch(url).then((response) => response.json());
 
 export default function Home() {
-  const searchParams = useSearchParams();
-  const busStopCode = searchParams.get("busStop") || "75009"
-  
+  const [busStopCode, setBusStopCode] = useState("75009");  
+
   const {
     data: busArrivalData,
     error,
@@ -26,7 +25,7 @@ export default function Home() {
     <main className="h-screen mx-auto p-4 lg:w-2xl">
       <Navbar />
 
-      <SearchBar initialValue={busStopCode} />
+      <SearchBar initialValue={busStopCode} onSearch={setBusStopCode} />
 
       <div className="bus-arrival-timings">
         <div className="bg-white rounded-3xl shadow pb-5 ps-6 pe-8 pt-0 mt-5">

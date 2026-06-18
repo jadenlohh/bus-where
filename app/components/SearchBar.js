@@ -1,17 +1,15 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
-export default function SearchBar({ initialValue }) {
+export default function SearchBar({ initialValue, onSearch }) {
   const [value, setValue] = useState(initialValue);
-  const router = useRouter();
   const inputRef = useRef();
 
   const handleSubmit = () => {
     if (!value) return;
-
-    router.push(`/?busStop=${value}`);
+    onSearch(value)
+    
     setTimeout(() => {
       inputRef.current?.blur();
     }, 30);
