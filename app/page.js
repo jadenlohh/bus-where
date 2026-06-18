@@ -36,7 +36,7 @@ export default function Home() {
       <div className="bus-arrival-timings bg-white shadow rounded-3xl py-6 mt-5">
         <div>
           {!busStopInfoLoading && busStopInfo !== undefined && (
-            <div className="flex items-center border-b border-b-[#F1F1F1] justify-between w-full pb-5 px-6">
+            <div className="flex items-center border-b border-b-[#F1F1F1] justify-between w-full pb-4.5 px-6">
               <div>
                 <p className="font-semibold">{busStopInfo.name}</p>
                 <p className="text-xs text-grey">
@@ -110,7 +110,7 @@ export default function Home() {
           ) : (
             busArrivalData.map((bus) => {
               return (
-                <div className="flex py-3 first:pt-6" key={bus.ServiceNo}>
+                <div className="flex py-3.5 first:pt-7" key={bus.ServiceNo}>
                   <div className="bus-number">
                     <div className="bg-red text-white rounded-lg text-center w-16 p-3">
                       <p>{bus.ServiceNo}</p>
