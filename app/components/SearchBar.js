@@ -1,32 +1,17 @@
-"use client"
+"use client";
 
-export default function SearchBar() {
+export default function SearchBar({ onSearch }) {
   return (
     <div className="search-bar">
       <div className="flex items-center text-sm bg-white rounded-full shadow grow px-6 py-4.5 mt-5 lg:mt-6">
         <svg
-          width="19px"
-          height="19px"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          color="#A7A7A7"
+          width="19"
+          height="19"
+          fill="#A7A7A7"
+          viewBox="0 0 256 256"
         >
-          <path
-            d="M17 17L21 21"
-            stroke="#A7A7A7"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          ></path>
-          <path
-            d="M3 11C3 15.4183 6.58172 19 11 19C13.213 19 15.2161 18.1015 16.6644 16.6493C18.1077 15.2022 19 13.2053 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11Z"
-            stroke="#A7A7A7"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          ></path>
+          <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
         </svg>
 
         <input
@@ -34,7 +19,7 @@ export default function SearchBar() {
           placeholder="Search Bus Stop"
           className="w-full ms-2.5 focus:outline-none placeholder:text-grey"
           onKeyUp={(e) => {
-            e.key === "Enter" && window.location.assign(`/?busStop=${e.target.value}`)
+            e.key === "Enter" && onSearch(e.target.value);
           }}
         />
       </div>

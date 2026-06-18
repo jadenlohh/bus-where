@@ -1,28 +1,34 @@
 "use client";
-import useSWR from "swr";
 
+import useSWR from "swr";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import NextArrivalTiming from "./components/NextArrivalTiming";
 import SearchBar from "./components/SearchBar";
+import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 const fetcher = (url) => fetch(url).then((response) => response.json());
 
 export default function Home() {
+  const searchParams = useSearchParams();
+  const [busStopCode, setBusStopCode] = useState(
+    searchParams.get("busStop") || "53009",
+  );
+
   const {
     data: busArrivalData,
     error,
     isLoading,
-  } = useSWR("/api/getBusArrival", fetcher);
+  } = useSWR(`/api/getBusArrival?busStopCode=${busStopCode}`, fetcher);
 
   if (error) return <div>An error occured</div>;
-  // if (isLoading) return <div>Loading...</div>;
 
   return (
     <main className="h-screen mx-auto p-4 lg:w-2xl">
       <Navbar />
 
-      <SearchBar />
+      <SearchBar onSearch={setBusStopCode} />
 
       <div className="bus-arrival-timings">
         <div className="bg-white rounded-3xl shadow pb-5 ps-6 pe-8 pt-0 mt-5">
@@ -135,13 +141,4 @@ export default function Home() {
       <Footer />
     </main>
   );
-}
-
-function getBusStopName(busStopCode) {
-  const { data: busStopName } = useSWR(
-    `/api/getBusStopName?busStopCode=${busStopCode}`,
-    fetcher,
-  );
-
-  return busStopName;
 }
