@@ -47,8 +47,8 @@ export default function Home() {
               <button
                 className={
                   isValidating
-                    ? "cursor-pointer p-2"
-                    : "cursor-pointer transition-transform rotate-360 duration-1000 p-2"
+                    ? "cursor-pointer animate-spin p-2"
+                    : "cursor-pointer p-2"
                 }
                 onClick={() => {
                   refreshBusArrivalData();
