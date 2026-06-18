@@ -1,13 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useRef, useState } from "react";
 
 export default function SearchBar({ initialValue }) {
   const [value, setValue] = useState(initialValue);
+  const router = useRouter();
+  const inputRef = useRef();
+
+  const handleSubmit = () => {
+    if (!value) return;
+
+    router.push(`/?busStop=${value}`);
+    setTimeout(() => {
+      inputRef.current?.blur();
+    }, 30);
+  };
 
   return (
     <div className="search-bar">
-      <div className="flex items-center text-sm bg-white rounded-full shadow grow px-6 py-4.5 mt-5 lg:mt-6">
+      <div className="flex items-center text-base bg-white rounded-full shadow grow px-6 py-4.5 mt-5 lg:mt-6">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="19"
@@ -21,12 +33,12 @@ export default function SearchBar({ initialValue }) {
         <input
           type="text"
           placeholder="Search Bus Stop"
-          className="w-full ms-2.5 focus:outline-none placeholder:text-grey"
+          className="w-full ms-2.5 focus:outline-none placeholder:text-grey placeholder:text-sm"
+          ref={inputRef}
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onKeyUp={(e) => {
-            e.key === "Enter" &&
-              window.location.assign(`/?busStop=${e.target.value}`);
+            if (e.key === "Enter") handleSubmit();
           }}
         />
       </div>

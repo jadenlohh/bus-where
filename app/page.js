@@ -12,10 +12,8 @@ const fetcher = (url) => fetch(url).then((response) => response.json());
 
 export default function Home() {
   const searchParams = useSearchParams();
-  const [busStopCode, setBusStopCode] = useState(
-    searchParams.get("busStop") || "75009",
-  );
-
+  const busStopCode = searchParams.get("busStop") || "75009"
+  
   const {
     data: busArrivalData,
     error,
